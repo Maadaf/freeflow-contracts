@@ -66,11 +66,9 @@ cargo test
 ```
 
 ```toml
-# Cargo.toml do consumer
-freeflow-contracts = { git = "https://github.com/Maadaf/freeflow-contracts.git", tag = "v0.1.0", path = "packaging/rust" }
+# Cargo.toml do consumer (workspace na raiz do repo de contratos)
+freeflow-contracts = { git = "https://github.com/Maadaf/freeflow-contracts.git", tag = "v0.1.0" }
 ```
-
-(Nota: com `git` + subdir, preferir path dependency local ou `Cargo.toml` na raiz numa versão futura se necessário.)
 
 Para desenvolvimento local a partir de um sibling repo:
 
