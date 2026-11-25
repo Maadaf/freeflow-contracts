@@ -1,0 +1,173 @@
+{
+  "$defs": {
+    "AntennaObservation": {
+      "additionalProperties": false,
+      "properties": {
+        "confidence": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "cross_read": {
+          "default": false,
+          "title": "Cross Read",
+          "type": "boolean"
+        },
+        "detected_position_m": {
+          "default": 0,
+          "title": "Detected Position M",
+          "type": "number"
+        },
+        "event_type": {
+          "const": "antenna.tag_read",
+          "default": "antenna.tag_read",
+          "title": "Event Type",
+          "type": "string"
+        },
+        "lane": {
+          "title": "Lane",
+          "type": "integer"
+        },
+        "lateral_offset_m": {
+          "default": 0,
+          "title": "Lateral Offset M",
+          "type": "number"
+        },
+        "passage_id": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Passage Id"
+        },
+        "protocol": {
+          "const": "ISO-18000-6C",
+          "default": "ISO-18000-6C",
+          "title": "Protocol",
+          "type": "string"
+        },
+        "read_lane": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Read Lane"
+        },
+        "sensor_id": {
+          "title": "Sensor Id",
+          "type": "string"
+        },
+        "sensor_timestamp_offset_ms": {
+          "default": 0,
+          "title": "Sensor Timestamp Offset Ms",
+          "type": "number"
+        },
+        "sensor_type": {
+          "const": "antenna",
+          "default": "antenna",
+          "title": "Sensor Type",
+          "type": "string"
+        },
+        "speed_kmh": {
+          "exclusiveMinimum": 0,
+          "title": "Speed Kmh",
+          "type": "number"
+        },
+        "tag_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Tag Id"
+        },
+        "vehicle_class": {
+          "$ref": "#/$defs/VehicleClass"
+        }
+      },
+      "required": [
+        "passage_id",
+        "sensor_id",
+        "lane",
+        "speed_kmh",
+        "vehicle_class",
+        "confidence"
+      ],
+      "title": "AntennaObservation",
+      "type": "object"
+    },
+    "VehicleClass": {
+      "enum": [
+        "light",
+        "heavy",
+        "motorcycle"
+      ],
+      "title": "VehicleClass",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.freeflow.local/events/v1/antenna.tag_read.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "correlation_id": {
+      "format": "uuid",
+      "title": "Correlation Id",
+      "type": "string"
+    },
+    "data": {
+      "$ref": "#/$defs/AntennaObservation"
+    },
+    "event_id": {
+      "format": "uuid",
+      "title": "Event Id",
+      "type": "string"
+    },
+    "gantry_id": {
+      "title": "Gantry Id",
+      "type": "string"
+    },
+    "occurred_at": {
+      "format": "date-time",
+      "title": "Occurred At",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source": {
+      "title": "Source",
+      "type": "string"
+    }
+  },
+  "required": [
+    "event_id",
+    "occurred_at",
+    "source",
+    "gantry_id",
+    "correlation_id",
+    "data"
+  ],
+  "title": "AntennaEventEnvelope",
+  "type": "object"
+}

@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "freeflow-contracts"
+version = "0.1.0"
+description = "Contratos partilhados FreeFlow (schemas v1 + modelos Pydantic)"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Proprietary" }
+authors = [{ name = "Tracevia / Maadaf" }]
+dependencies = [
+  "pydantic>=2.6,<3",
+]
+
+[project.optional-dependencies]
+validate = ["jsonschema>=4.21,<5", "referencing>=0.35,<1"]
+dev = ["pytest>=8", "jsonschema>=4.21,<5", "referencing>=0.35,<1"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+freeflow_contracts = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

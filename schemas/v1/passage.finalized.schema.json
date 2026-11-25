@@ -1,0 +1,250 @@
+{
+  "$id": "https://schemas.freeflow.local/passages/v1/passage.finalized.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "correlation_confidence": {
+      "maximum": 1,
+      "minimum": 0,
+      "type": "number"
+    },
+    "dimensions": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "height_m": {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            "length_m": {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            "width_m": {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            }
+          },
+          "required": [
+            "length_m",
+            "width_m",
+            "height_m"
+          ],
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "evidence": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "captured_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "evidence_id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "height_px": {
+            "anyOf": [
+              {
+                "exclusiveMinimum": 0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "media_type": {
+            "const": "image/jpeg",
+            "type": "string"
+          },
+          "sha256": {
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "size_bytes": {
+            "exclusiveMinimum": 0,
+            "type": "integer"
+          },
+          "uri": {
+            "pattern": "^(sim|s3|file)://",
+            "type": "string"
+          },
+          "width_px": {
+            "anyOf": [
+              {
+                "exclusiveMinimum": 0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "evidence_id",
+          "uri",
+          "media_type",
+          "sha256",
+          "size_bytes"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "finalized_at": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "first_seen_at": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "gantry_id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "last_seen_at": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "observation_count": {
+      "minimum": 1,
+      "type": "integer"
+    },
+    "observation_event_ids": {
+      "items": {
+        "format": "uuid",
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "passage_id": {
+      "format": "uuid",
+      "type": "string"
+    },
+    "passage_id_source": {
+      "enum": [
+        "provided",
+        "inferred",
+        "generated"
+      ],
+      "type": "string"
+    },
+    "plate": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "plate_confidence": {
+      "anyOf": [
+        {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "type": "string"
+    },
+    "sensors_missing": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "sensors_present": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "speed_kmh": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "status": {
+      "enum": [
+        "complete",
+        "expired"
+      ],
+      "type": "string"
+    },
+    "tag_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "vehicle_class": {
+      "anyOf": [
+        {
+          "enum": [
+            "light",
+            "heavy",
+            "motorcycle"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "passage_id",
+    "gantry_id",
+    "status",
+    "first_seen_at",
+    "last_seen_at",
+    "finalized_at",
+    "observation_count",
+    "passage_id_source",
+    "correlation_confidence",
+    "sensors_present",
+    "sensors_missing",
+    "evidence",
+    "observation_event_ids"
+  ],
+  "title": "PassageFinalized",
+  "type": "object"
+}

@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "event_id": "33333333-3333-4333-8333-333333333333",
+  "correlation_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+  "occurred_at": "2026-01-01T12:00:00.070Z",
+  "source": "camera-gateway",
+  "gantry_id": "A1-KM10-N",
+  "data": {
+    "event_type": "camera.plate_read",
+    "passage_id": null,
+    "sensor_id": "camera-01",
+    "sensor_type": "camera",
+    "lane": 1,
+    "speed_kmh": 90.0,
+    "vehicle_class": "light",
+    "confidence": 0.97,
+    "detected_position_m": 7.0,
+    "lateral_offset_m": 0.0,
+    "sensor_timestamp_offset_ms": 0.0,
+    "plate": "12-AB-34",
+    "plate_country": "PT",
+    "plate_confidence": 0.98,
+    "evidence": {
+      "uri": "file:///evidence/A1-KM10-N/camera-01.jpg",
+      "media_type": "image/jpeg",
+      "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "size_bytes": 12345,
+      "width_px": 1920,
+      "height_px": 1080
+    },
+    "weather": "clear",
+    "lighting": "day",
+    "blur": 0.0,
+    "plate_occluded": false
+  }
+}

@@ -1,0 +1,17 @@
+[package]
+name = "freeflow-contracts"
+version = "0.1.0"
+edition = "2021"
+description = "Contratos partilhados FreeFlow (modelos Serde espelhados dos JSON Schema v1)"
+license = "LicenseRef-Proprietary"
+publish = false
+
+[dependencies]
+chrono = { version = "0.4", default-features = false, features = ["clock", "serde", "std"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+uuid = { version = "1", features = ["serde"] }
+
+[dev-dependencies]
+serde_json = "1"

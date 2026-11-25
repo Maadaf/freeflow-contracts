@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "event_id": "22222222-2222-4222-8222-222222222222",
+  "correlation_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+  "occurred_at": "2026-01-01T12:00:00.040Z",
+  "source": "lidar-gateway",
+  "gantry_id": "A1-KM10-N",
+  "data": {
+    "event_type": "lidar.vehicle_profiled",
+    "passage_id": null,
+    "sensor_id": "lidar-01",
+    "sensor_type": "lidar",
+    "lane": 1,
+    "speed_kmh": 91.0,
+    "vehicle_class": "light",
+    "confidence": 0.9,
+    "detected_position_m": 4.0,
+    "lateral_offset_m": 0.0,
+    "sensor_timestamp_offset_ms": 0.0,
+    "dimensions": {
+      "length_m": 4.3,
+      "width_m": 1.8,
+      "height_m": 1.5
+    },
+    "axle_count": 2,
+    "point_count": 1500,
+    "profile_quality": 0.92,
+    "has_trailer": false
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "event_id": "11111111-1111-4111-8111-111111111111",
+  "correlation_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+  "occurred_at": "2026-01-01T12:00:00.010Z",
+  "source": "simulator:radar-l1",
+  "gantry_id": "A1-KM10-N",
+  "data": {
+    "event_type": "radar.vehicle_detected",
+    "passage_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+    "sensor_id": "radar-l1",
+    "sensor_type": "radar",
+    "lane": 1,
+    "speed_kmh": 92.5,
+    "vehicle_class": "light",
+    "confidence": 0.95,
+    "detected_position_m": 0.0,
+    "lateral_offset_m": 0.1,
+    "sensor_timestamp_offset_ms": 0.0,
+    "heading_degrees": 180.0,
+    "is_ghost": false
+  }
+}

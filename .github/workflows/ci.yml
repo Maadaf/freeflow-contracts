@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [main, "cursor/**"]
+  pull_request:
+
+jobs:
+  python-sync:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packaging/python
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install
+        run: pip install -e ".[dev]"
+      - name: Pytest
+        run: pytest -q
+      - name: Sync check
+        working-directory: .
+        run: python tools/check_sync.py
+
+  rust-sync:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packaging/rust
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Cargo test
+        run: cargo test

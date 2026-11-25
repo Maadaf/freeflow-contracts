@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "passage_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+  "gantry_id": "A1-KM10-N",
+  "status": "expired",
+  "first_seen_at": "2026-01-01T12:05:00.000Z",
+  "last_seen_at": "2026-01-01T12:05:00.020Z",
+  "finalized_at": "2026-01-01T12:05:05.000Z",
+  "observation_count": 1,
+  "passage_id_source": "generated",
+  "correlation_confidence": 0.4,
+  "speed_kmh": 88.0,
+  "vehicle_class": "light",
+  "plate": null,
+  "plate_confidence": null,
+  "tag_id": null,
+  "dimensions": null,
+  "sensors_present": [
+    "radar.vehicle_detected"
+  ],
+  "sensors_missing": [
+    "lidar.vehicle_profiled",
+    "camera.plate_read",
+    "antenna.tag_read"
+  ],
+  "evidence": [],
+  "observation_event_ids": [
+    "55555555-5555-4555-8555-555555555555"
+  ]
+}

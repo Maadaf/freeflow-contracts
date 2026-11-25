@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "event_id": "44444444-4444-4444-8444-444444444444",
+  "correlation_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+  "occurred_at": "2026-01-01T12:00:00.090Z",
+  "source": "simulator:antenna-l1",
+  "gantry_id": "A1-KM10-N",
+  "data": {
+    "event_type": "antenna.tag_read",
+    "passage_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+    "sensor_id": "antenna-l1",
+    "sensor_type": "antenna",
+    "lane": 1,
+    "speed_kmh": 90.0,
+    "vehicle_class": "light",
+    "confidence": 0.99,
+    "detected_position_m": 9.0,
+    "lateral_offset_m": 0.0,
+    "sensor_timestamp_offset_ms": 0.0,
+    "tag_id": "E2003411B80201160660A9B2",
+    "protocol": "ISO-18000-6C",
+    "read_lane": 1,
+    "cross_read": false
+  }
+}

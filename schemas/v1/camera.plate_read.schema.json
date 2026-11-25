@@ -1,0 +1,270 @@
+{
+  "$defs": {
+    "CameraObservation": {
+      "additionalProperties": false,
+      "properties": {
+        "blur": {
+          "default": 0,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Blur",
+          "type": "number"
+        },
+        "confidence": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "detected_position_m": {
+          "default": 0,
+          "title": "Detected Position M",
+          "type": "number"
+        },
+        "event_type": {
+          "const": "camera.plate_read",
+          "default": "camera.plate_read",
+          "title": "Event Type",
+          "type": "string"
+        },
+        "evidence": {
+          "$ref": "#/$defs/EvidenceReference"
+        },
+        "lane": {
+          "title": "Lane",
+          "type": "integer"
+        },
+        "lateral_offset_m": {
+          "default": 0,
+          "title": "Lateral Offset M",
+          "type": "number"
+        },
+        "lighting": {
+          "$ref": "#/$defs/Lighting",
+          "default": "day"
+        },
+        "passage_id": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Passage Id"
+        },
+        "plate": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Plate"
+        },
+        "plate_confidence": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Plate Confidence",
+          "type": "number"
+        },
+        "plate_country": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Plate Country"
+        },
+        "plate_occluded": {
+          "default": false,
+          "title": "Plate Occluded",
+          "type": "boolean"
+        },
+        "sensor_id": {
+          "title": "Sensor Id",
+          "type": "string"
+        },
+        "sensor_timestamp_offset_ms": {
+          "default": 0,
+          "title": "Sensor Timestamp Offset Ms",
+          "type": "number"
+        },
+        "sensor_type": {
+          "const": "camera",
+          "default": "camera",
+          "title": "Sensor Type",
+          "type": "string"
+        },
+        "speed_kmh": {
+          "exclusiveMinimum": 0,
+          "title": "Speed Kmh",
+          "type": "number"
+        },
+        "vehicle_class": {
+          "$ref": "#/$defs/VehicleClass"
+        },
+        "weather": {
+          "$ref": "#/$defs/Weather",
+          "default": "clear"
+        }
+      },
+      "required": [
+        "passage_id",
+        "sensor_id",
+        "lane",
+        "speed_kmh",
+        "vehicle_class",
+        "confidence",
+        "plate_confidence",
+        "evidence"
+      ],
+      "title": "CameraObservation",
+      "type": "object"
+    },
+    "EvidenceReference": {
+      "additionalProperties": false,
+      "properties": {
+        "height_px": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Height Px"
+        },
+        "media_type": {
+          "const": "image/jpeg",
+          "default": "image/jpeg",
+          "title": "Media Type",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        },
+        "uri": {
+          "pattern": "^(sim|s3|file)://",
+          "title": "Uri",
+          "type": "string"
+        },
+        "width_px": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Width Px"
+        }
+      },
+      "required": [
+        "uri",
+        "sha256",
+        "size_bytes",
+        "media_type"
+      ],
+      "title": "EvidenceReference",
+      "type": "object"
+    },
+    "Lighting": {
+      "enum": [
+        "day",
+        "dusk",
+        "night"
+      ],
+      "title": "Lighting",
+      "type": "string"
+    },
+    "VehicleClass": {
+      "enum": [
+        "light",
+        "heavy",
+        "motorcycle"
+      ],
+      "title": "VehicleClass",
+      "type": "string"
+    },
+    "Weather": {
+      "enum": [
+        "clear",
+        "rain",
+        "fog"
+      ],
+      "title": "Weather",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.freeflow.local/events/v1/camera.plate_read.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "correlation_id": {
+      "format": "uuid",
+      "title": "Correlation Id",
+      "type": "string"
+    },
+    "data": {
+      "$ref": "#/$defs/CameraObservation"
+    },
+    "event_id": {
+      "format": "uuid",
+      "title": "Event Id",
+      "type": "string"
+    },
+    "gantry_id": {
+      "title": "Gantry Id",
+      "type": "string"
+    },
+    "occurred_at": {
+      "format": "date-time",
+      "title": "Occurred At",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source": {
+      "title": "Source",
+      "type": "string"
+    }
+  },
+  "required": [
+    "event_id",
+    "occurred_at",
+    "source",
+    "gantry_id",
+    "correlation_id",
+    "data"
+  ],
+  "title": "CameraEventEnvelope",
+  "type": "object"
+}

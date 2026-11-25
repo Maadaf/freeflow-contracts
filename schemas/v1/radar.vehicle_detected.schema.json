@@ -1,0 +1,149 @@
+{
+  "$defs": {
+    "RadarObservation": {
+      "additionalProperties": false,
+      "properties": {
+        "confidence": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "detected_position_m": {
+          "default": 0,
+          "title": "Detected Position M",
+          "type": "number"
+        },
+        "event_type": {
+          "const": "radar.vehicle_detected",
+          "default": "radar.vehicle_detected",
+          "title": "Event Type",
+          "type": "string"
+        },
+        "heading_degrees": {
+          "exclusiveMaximum": 360,
+          "minimum": 0,
+          "title": "Heading Degrees",
+          "type": "number"
+        },
+        "is_ghost": {
+          "default": false,
+          "title": "Is Ghost",
+          "type": "boolean"
+        },
+        "lane": {
+          "title": "Lane",
+          "type": "integer"
+        },
+        "lateral_offset_m": {
+          "default": 0,
+          "title": "Lateral Offset M",
+          "type": "number"
+        },
+        "passage_id": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Passage Id"
+        },
+        "sensor_id": {
+          "title": "Sensor Id",
+          "type": "string"
+        },
+        "sensor_timestamp_offset_ms": {
+          "default": 0,
+          "title": "Sensor Timestamp Offset Ms",
+          "type": "number"
+        },
+        "sensor_type": {
+          "const": "radar",
+          "default": "radar",
+          "title": "Sensor Type",
+          "type": "string"
+        },
+        "speed_kmh": {
+          "exclusiveMinimum": 0,
+          "title": "Speed Kmh",
+          "type": "number"
+        },
+        "vehicle_class": {
+          "$ref": "#/$defs/VehicleClass"
+        }
+      },
+      "required": [
+        "passage_id",
+        "sensor_id",
+        "lane",
+        "speed_kmh",
+        "vehicle_class",
+        "confidence",
+        "heading_degrees"
+      ],
+      "title": "RadarObservation",
+      "type": "object"
+    },
+    "VehicleClass": {
+      "enum": [
+        "light",
+        "heavy",
+        "motorcycle"
+      ],
+      "title": "VehicleClass",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.freeflow.local/events/v1/radar.vehicle_detected.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "correlation_id": {
+      "format": "uuid",
+      "title": "Correlation Id",
+      "type": "string"
+    },
+    "data": {
+      "$ref": "#/$defs/RadarObservation"
+    },
+    "event_id": {
+      "format": "uuid",
+      "title": "Event Id",
+      "type": "string"
+    },
+    "gantry_id": {
+      "title": "Gantry Id",
+      "type": "string"
+    },
+    "occurred_at": {
+      "format": "date-time",
+      "title": "Occurred At",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source": {
+      "title": "Source",
+      "type": "string"
+    }
+  },
+  "required": [
+    "event_id",
+    "occurred_at",
+    "source",
+    "gantry_id",
+    "correlation_id",
+    "data"
+  ],
+  "title": "RadarEventEnvelope",
+  "type": "object"
+}

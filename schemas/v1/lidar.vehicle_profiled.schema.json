@@ -1,0 +1,193 @@
+{
+  "$defs": {
+    "LidarObservation": {
+      "additionalProperties": false,
+      "properties": {
+        "axle_count": {
+          "maximum": 16,
+          "minimum": 2,
+          "title": "Axle Count",
+          "type": "integer"
+        },
+        "confidence": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "detected_position_m": {
+          "default": 0,
+          "title": "Detected Position M",
+          "type": "number"
+        },
+        "dimensions": {
+          "$ref": "#/$defs/VehicleDimensions"
+        },
+        "event_type": {
+          "const": "lidar.vehicle_profiled",
+          "default": "lidar.vehicle_profiled",
+          "title": "Event Type",
+          "type": "string"
+        },
+        "has_trailer": {
+          "default": false,
+          "title": "Has Trailer",
+          "type": "boolean"
+        },
+        "lane": {
+          "title": "Lane",
+          "type": "integer"
+        },
+        "lateral_offset_m": {
+          "default": 0,
+          "title": "Lateral Offset M",
+          "type": "number"
+        },
+        "passage_id": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Passage Id"
+        },
+        "point_count": {
+          "default": 1200,
+          "exclusiveMinimum": 0,
+          "title": "Point Count",
+          "type": "integer"
+        },
+        "profile_quality": {
+          "default": 1,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Profile Quality",
+          "type": "number"
+        },
+        "sensor_id": {
+          "title": "Sensor Id",
+          "type": "string"
+        },
+        "sensor_timestamp_offset_ms": {
+          "default": 0,
+          "title": "Sensor Timestamp Offset Ms",
+          "type": "number"
+        },
+        "sensor_type": {
+          "const": "lidar",
+          "default": "lidar",
+          "title": "Sensor Type",
+          "type": "string"
+        },
+        "speed_kmh": {
+          "exclusiveMinimum": 0,
+          "title": "Speed Kmh",
+          "type": "number"
+        },
+        "vehicle_class": {
+          "$ref": "#/$defs/VehicleClass"
+        }
+      },
+      "required": [
+        "passage_id",
+        "sensor_id",
+        "lane",
+        "speed_kmh",
+        "vehicle_class",
+        "confidence",
+        "dimensions",
+        "axle_count"
+      ],
+      "title": "LidarObservation",
+      "type": "object"
+    },
+    "VehicleClass": {
+      "enum": [
+        "light",
+        "heavy",
+        "motorcycle"
+      ],
+      "title": "VehicleClass",
+      "type": "string"
+    },
+    "VehicleDimensions": {
+      "additionalProperties": false,
+      "properties": {
+        "height_m": {
+          "exclusiveMinimum": 0,
+          "title": "Height M",
+          "type": "number"
+        },
+        "length_m": {
+          "exclusiveMinimum": 0,
+          "title": "Length M",
+          "type": "number"
+        },
+        "width_m": {
+          "exclusiveMinimum": 0,
+          "title": "Width M",
+          "type": "number"
+        }
+      },
+      "required": [
+        "length_m",
+        "width_m",
+        "height_m"
+      ],
+      "title": "VehicleDimensions",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.freeflow.local/events/v1/lidar.vehicle_profiled.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "correlation_id": {
+      "format": "uuid",
+      "title": "Correlation Id",
+      "type": "string"
+    },
+    "data": {
+      "$ref": "#/$defs/LidarObservation"
+    },
+    "event_id": {
+      "format": "uuid",
+      "title": "Event Id",
+      "type": "string"
+    },
+    "gantry_id": {
+      "title": "Gantry Id",
+      "type": "string"
+    },
+    "occurred_at": {
+      "format": "date-time",
+      "title": "Occurred At",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source": {
+      "title": "Source",
+      "type": "string"
+    }
+  },
+  "required": [
+    "event_id",
+    "occurred_at",
+    "source",
+    "gantry_id",
+    "correlation_id",
+    "data"
+  ],
+  "title": "LidarEventEnvelope",
+  "type": "object"
+}
