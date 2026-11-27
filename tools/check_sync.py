@@ -16,6 +16,7 @@ EVENT_FILES = {
     "lidar.vehicle_profiled": "lidar.vehicle_profiled.schema.json",
     "camera.plate_read": "camera.plate_read.schema.json",
     "antenna.tag_read": "antenna.tag_read.schema.json",
+    "wim.axles_counted": "wim.axles_counted.schema.json",
 }
 
 
@@ -60,6 +61,7 @@ def main() -> None:
         "passage.finalized.schema.json",
         "radar.vehicle_detected.schema.json",
         "subjects.md",
+        "wim.axles_counted.schema.json",
     }
     present = {p.name for p in SCHEMAS.iterdir() if p.is_file()}
     missing = expected - present

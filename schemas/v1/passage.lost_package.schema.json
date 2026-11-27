@@ -1,0 +1,86 @@
+{
+  "$id": "https://schemas.freeflow.local/passages/v1/passage.lost_package.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "type": "string"
+    },
+    "lost_id": {
+      "format": "uuid",
+      "type": "string"
+    },
+    "package_id": {
+      "anyOf": [
+        {
+          "format": "uuid",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "passage_id": {
+      "anyOf": [
+        {
+          "format": "uuid",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "gantry_id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "lane": {
+      "anyOf": [
+        {
+          "minimum": 1,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "vehicle_class": {
+      "anyOf": [
+        {
+          "enum": ["light", "heavy", "motorcycle"],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "occurred_at": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "lost_at": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "reason": {
+      "enum": ["disk_pressure", "overwrite", "other"],
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "lost_id",
+    "gantry_id",
+    "occurred_at",
+    "lost_at",
+    "reason"
+  ],
+  "title": "PassageLostPackage",
+  "type": "object"
+}

@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0",
+  "lost_id": "cccccccc-cccc-4ccc-8ccc-cccccccccccc",
+  "package_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+  "passage_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+  "gantry_id": "A1-KM10-N",
+  "lane": 1,
+  "vehicle_class": "light",
+  "occurred_at": "2026-01-01T12:00:00.010Z",
+  "lost_at": "2026-01-01T12:05:00.000Z",
+  "reason": "disk_pressure"
+}

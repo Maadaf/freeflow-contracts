@@ -5,6 +5,7 @@ from pathlib import Path
 
 import pytest
 from freeflow_contracts.events import EventEnvelope
+from freeflow_contracts.packages import PassageEvidencePackage, PassageLostPackage
 from freeflow_contracts.passages import PassageFinalized
 from freeflow_contracts.subjects import event_subject, passage_subject
 
@@ -18,6 +19,7 @@ EVENT_SCHEMA = {
     "lidar.vehicle_profiled": "lidar.vehicle_profiled.schema.json",
     "camera.plate_read": "camera.plate_read.schema.json",
     "antenna.tag_read": "antenna.tag_read.schema.json",
+    "wim.axles_counted": "wim.axles_counted.schema.json",
 }
 
 
@@ -40,6 +42,13 @@ def test_passage_fixture_parses_with_pydantic(name: str) -> None:
     assert passage.status.value == name
 
 
+def test_evidence_and_lost_package_fixtures_parse() -> None:
+    package = PassageEvidencePackage.model_validate(_load(PASSAGES / "evidence_package.json"))
+    assert package.gantry_id == "A1-KM10-N"
+    lost = PassageLostPackage.model_validate(_load(PASSAGES / "lost_package.json"))
+    assert lost.reason.value == "disk_pressure"
+
+
 @pytest.mark.parametrize("name,schema_file", sorted(EVENT_SCHEMA.items()))
 def test_event_fixture_matches_json_schema(name: str, schema_file: str) -> None:
     jsonschema = pytest.importorskip("jsonschema")
@@ -56,10 +65,28 @@ def test_passage_fixture_matches_json_schema(name: str) -> None:
     jsonschema.Draft202012Validator(schema).validate(payload)
 
 
+@pytest.mark.parametrize(
+    "name,schema_file",
+    [
+        ("evidence_package", "passage.evidence_package.schema.json"),
+        ("lost_package", "passage.lost_package.schema.json"),
+    ],
+)
+def test_package_fixtures_match_json_schema(name: str, schema_file: str) -> None:
+    jsonschema = pytest.importorskip("jsonschema")
+    schema = _load(SCHEMAS / schema_file)
+    payload = _load(PASSAGES / f"{name}.json")
+    jsonschema.Draft202012Validator(schema).validate(payload)
+
+
 def test_subjects_include_gantry() -> None:
     assert (
         event_subject("A1-KM10-N", "camera")
         == "freeflow.events.A1-KM10-N.camera.plate_read"
+    )
+    assert (
+        event_subject("A1-KM10-N", "wim")
+        == "freeflow.events.A1-KM10-N.wim.axles_counted"
     )
     assert passage_subject("complete") == "freeflow.passages.completed"
     assert passage_subject("expired") == "freeflow.passages.expired"

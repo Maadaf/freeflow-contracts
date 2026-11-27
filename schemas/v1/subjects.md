@@ -21,11 +21,13 @@ Exemplos:
 - `freeflow.events.a2-km25-s.lidar.vehicle_profiled`
 - `freeflow.events.a2-km25-s.camera.plate_read`
 - `freeflow.events.a2-km25-s.antenna.tag_read`
+- `freeflow.events.a2-km25-s.wim.axles_counted`
 
 Notas:
 
 - `<gantry_id>` deve coincidir com o campo `gantry_id` do envelope.
-- `<sensor_type>` ∈ `radar` | `lidar` | `camera` | `antenna`.
+- `<sensor_type>` ∈ `radar` | `lidar` | `camera` | `antenna` | `wim`.
+- `wim.axles_counted` = piezo/WIM para **contagem de eixos** (não pesagem; sem campos de peso/massa).
 - O vehicle-tracker pode subscrever `freeflow.events.>`.
 - Subjects “planos” sem gantry (`freeflow.events.camera.plate_read`) **não** fazem parte da convenção v1.
 

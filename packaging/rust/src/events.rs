@@ -48,6 +48,8 @@ pub enum Observation {
     Camera(CameraData),
     #[serde(rename = "antenna.tag_read")]
     Antenna(AntennaData),
+    #[serde(rename = "wim.axles_counted")]
+    Wim(WimData),
 }
 
 impl Observation {
@@ -57,6 +59,7 @@ impl Observation {
             Self::Lidar(_) => "lidar.vehicle_profiled",
             Self::Camera(_) => "camera.plate_read",
             Self::Antenna(_) => "antenna.tag_read",
+            Self::Wim(_) => "wim.axles_counted",
         }
     }
 
@@ -66,6 +69,7 @@ impl Observation {
             Self::Lidar(v) => &v.common,
             Self::Camera(v) => &v.common,
             Self::Antenna(v) => &v.common,
+            Self::Wim(v) => &v.common,
         }
     }
 
@@ -115,6 +119,14 @@ impl Observation {
                     return Err(ContractError::Field("read_lane"));
                 }
             }
+            Self::Wim(v) => {
+                if v.common.sensor_type != SensorType::Wim {
+                    return Err(ContractError::Field("sensor_type"));
+                }
+                if !(2..=16).contains(&v.axle_count) {
+                    return Err(ContractError::Field("axle_count"));
+                }
+            }
         }
         Ok(())
     }
@@ -154,6 +166,7 @@ pub enum SensorType {
     Lidar,
     Camera,
     Antenna,
+    Wim,
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -272,6 +285,26 @@ pub struct AntennaData {
     pub read_lane: Option<u16>,
     #[serde(default)]
     pub cross_read: bool,
+}
+
+/// Piezo/WIM: axle count only — no weight/mass fields.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct WimData {
+    #[serde(flatten)]
+    pub common: ObservationBase,
+    pub axle_count: u16,
+    #[serde(default = "piezo")]
+    pub sensing: Sensing,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "lowercase")]
+pub enum Sensing {
+    Piezo,
+}
+
+fn piezo() -> Sensing {
+    Sensing::Piezo
 }
 
 fn unit(value: f64) -> bool {

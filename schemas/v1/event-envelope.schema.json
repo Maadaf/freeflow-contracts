@@ -420,6 +420,98 @@
       "title": "Lighting",
       "type": "string"
     },
+    "WimObservation": {
+      "additionalProperties": false,
+      "description": "Piezo/WIM: contagem fiável de eixos. Sem peso/massa — não é pesagem.",
+      "properties": {
+        "axle_count": {
+          "maximum": 16,
+          "minimum": 2,
+          "title": "Axle Count",
+          "type": "integer"
+        },
+        "confidence": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "detected_position_m": {
+          "default": 0,
+          "title": "Detected Position M",
+          "type": "number"
+        },
+        "event_type": {
+          "const": "wim.axles_counted",
+          "default": "wim.axles_counted",
+          "title": "Event Type",
+          "type": "string"
+        },
+        "lane": {
+          "title": "Lane",
+          "type": "integer"
+        },
+        "lateral_offset_m": {
+          "default": 0,
+          "title": "Lateral Offset M",
+          "type": "number"
+        },
+        "passage_id": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Passage Id"
+        },
+        "sensing": {
+          "const": "piezo",
+          "default": "piezo",
+          "description": "Método físico: bandas piezoelétricas (contagem, não pesagem).",
+          "title": "Sensing",
+          "type": "string"
+        },
+        "sensor_id": {
+          "title": "Sensor Id",
+          "type": "string"
+        },
+        "sensor_timestamp_offset_ms": {
+          "default": 0,
+          "title": "Sensor Timestamp Offset Ms",
+          "type": "number"
+        },
+        "sensor_type": {
+          "const": "wim",
+          "default": "wim",
+          "title": "Sensor Type",
+          "type": "string"
+        },
+        "speed_kmh": {
+          "exclusiveMinimum": 0,
+          "title": "Speed Kmh",
+          "type": "number"
+        },
+        "vehicle_class": {
+          "$ref": "#/$defs/VehicleClass"
+        }
+      },
+      "required": [
+        "passage_id",
+        "sensor_id",
+        "lane",
+        "speed_kmh",
+        "vehicle_class",
+        "confidence",
+        "axle_count"
+      ],
+      "title": "WimObservation",
+      "type": "object"
+    },
     "RadarObservation": {
       "additionalProperties": false,
       "properties": {
@@ -570,7 +662,8 @@
           "antenna.tag_read": "#/$defs/AntennaObservation",
           "camera.plate_read": "#/$defs/CameraObservation",
           "lidar.vehicle_profiled": "#/$defs/LidarObservation",
-          "radar.vehicle_detected": "#/$defs/RadarObservation"
+          "radar.vehicle_detected": "#/$defs/RadarObservation",
+          "wim.axles_counted": "#/$defs/WimObservation"
         },
         "propertyName": "event_type"
       },
@@ -586,6 +679,9 @@
         },
         {
           "$ref": "#/$defs/AntennaObservation"
+        },
+        {
+          "$ref": "#/$defs/WimObservation"
         }
       ],
       "title": "Data"

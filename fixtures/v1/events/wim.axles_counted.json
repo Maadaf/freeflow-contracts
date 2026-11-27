@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "event_id": "55555555-5555-4555-8555-555555555555",
+  "correlation_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+  "occurred_at": "2026-01-01T12:00:00.040Z",
+  "source": "simulator:wim-l1",
+  "gantry_id": "A1-KM10-N",
+  "data": {
+    "event_type": "wim.axles_counted",
+    "passage_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+    "sensor_id": "wim-l1",
+    "sensor_type": "wim",
+    "lane": 1,
+    "speed_kmh": 88.0,
+    "vehicle_class": "heavy",
+    "confidence": 0.97,
+    "detected_position_m": 0.0,
+    "lateral_offset_m": 0.0,
+    "sensor_timestamp_offset_ms": 0.0,
+    "axle_count": 5,
+    "sensing": "piezo"
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "schema_version": "1.0",
+  "package_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+  "passage_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+  "gantry_id": "A1-KM10-N",
+  "lane": 1,
+  "vehicle_class": "light",
+  "occurred_at": "2026-01-01T12:00:00.010Z",
+  "assembled_at": "2026-01-01T12:00:01.200Z",
+  "ack_state": "pending",
+  "confidence": {
+    "correlation": 0.92,
+    "plate": 0.98,
+    "overall": 0.95
+  },
+  "media": {
+    "video_lateral": {
+      "evidence_id": "66666666-6666-4666-8666-666666666666",
+      "uri": "sim://lab/video-lateral.mp4",
+      "media_type": "video/mp4",
+      "sha256": "3ca7408395a6fc580e724b878d21dddfb40580d637ace13dcc725d943f76d8eb",
+      "size_bytes": 287975,
+      "captured_at": "2026-01-01T12:00:00.000Z",
+      "role": "video_lateral"
+    },
+    "video_overview": {
+      "evidence_id": "77777777-7777-4777-8777-777777777777",
+      "uri": "sim://lab/video-overview.mp4",
+      "media_type": "video/mp4",
+      "sha256": "a878a048e0d3aa029c47ad8952a81c1392fb5f27bfd6ce6f6e69c77f31bee1d8",
+      "size_bytes": 241006,
+      "captured_at": "2026-01-01T12:00:00.000Z",
+      "role": "video_overview"
+    },
+    "anpr": [
+      {
+        "evidence_id": "33333333-3333-4333-8333-333333333333",
+        "uri": "sim://lab/anpr-front.jpg",
+        "media_type": "image/jpeg",
+        "sha256": "b1e718c064a01a5e380e5992a491a804994213dd66bdcd006f60695810dda1e3",
+        "size_bytes": 112337,
+        "captured_at": "2026-01-01T12:00:00.070Z",
+        "role": "anpr_front",
+        "ocr_text": "ABC1D23"
+      },
+      {
+        "evidence_id": "44444444-4444-4444-8444-444444444444",
+        "uri": "sim://lab/anpr-rear.jpg",
+        "media_type": "image/jpeg",
+        "sha256": "05e32c8bba7bded4707eee7eae178ff2a31701a345a17b0204e7eeb8499bf0af",
+        "size_bytes": 97763,
+        "captured_at": "2026-01-01T12:00:00.242Z",
+        "role": "anpr_rear",
+        "ocr_text": "ABC1D23"
+      }
+    ]
+  },
+  "events": [
+    {
+      "schema_version": "1.0",
+      "event_id": "11111111-1111-4111-8111-111111111111",
+      "event_type": "radar.vehicle_detected",
+      "gantry_id": "A1-KM10-N",
+      "occurred_at": "2026-01-01T12:00:00.010Z",
+      "data": {
+        "event_type": "radar.vehicle_detected",
+        "lane": 1,
+        "speed_kmh": 92.5,
+        "vehicle_class": "light",
+        "confidence": 0.95,
+        "lateral_offset_m": 0.1,
+        "heading_degrees": 180.0,
+        "is_ghost": false
+      }
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": "22222222-2222-4222-8222-222222222222",
+      "event_type": "lidar.vehicle_profiled",
+      "gantry_id": "A1-KM10-N",
+      "occurred_at": "2026-01-01T12:00:00.040Z",
+      "data": {
+        "event_type": "lidar.vehicle_profiled",
+        "lane": 1,
+        "speed_kmh": 91.0,
+        "vehicle_class": "light",
+        "confidence": 0.9,
+        "lateral_offset_m": 0.0,
+        "dimensions": {
+          "length_m": 4.3,
+          "width_m": 1.8,
+          "height_m": 1.5
+        },
+        "axle_count": 2,
+        "point_count": 1500,
+        "profile_quality": 0.92,
+        "has_trailer": false
+      }
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": "55555555-5555-4555-8555-555555555555",
+      "event_type": "wim.axles_counted",
+      "gantry_id": "A1-KM10-N",
+      "occurred_at": "2026-01-01T12:00:00.040Z",
+      "data": {
+        "event_type": "wim.axles_counted",
+        "lane": 1,
+        "speed_kmh": 88.0,
+        "vehicle_class": "light",
+        "confidence": 0.97,
+        "axle_count": 2,
+        "sensing": "piezo"
+      }
+    },
+    {
+      "schema_version": "1.0",
+      "event_id": "33333333-3333-4333-8333-333333333333",
+      "event_type": "camera.plate_read",
+      "gantry_id": "A1-KM10-N",
+      "occurred_at": "2026-01-01T12:00:00.070Z",
+      "data": {
+        "event_type": "camera.plate_read",
+        "lane": 1,
+        "plate": "ABC1D23",
+        "plate_confidence": 0.98,
+        "vehicle_class": "light",
+        "speed_kmh": 90.0,
+        "confidence": 0.97
+      }
+    }
+  ],
+  "stubs": {
+    "videos_pending": false,
+    "notes": "Lab path: Mercosul ANPR (ABC1D23) + lateral/overview 10s MP4 from highway refs (ref-lateral/overview) under ops-ui /lab; radar/lidar/WIM events for twin"
+  },
+  "passage": {
+    "plate": "ABC1D23"
+  }
+}

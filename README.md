@@ -2,7 +2,7 @@
 
 Fonte única dos contratos FreeFlow entre os serviços edge (simulador, gateways, vehicle-tracker, edge-uploader).
 
-**Versão:** `0.1.0` · **Schema:** `1.0` · **Sem codegen nesta v1** — JSON Schema + fixtures + modelos espelhados Python/Rust + CI de sync.
+**Versão:** `0.1.1` · **Schema:** `1.0` · **Sem codegen nesta v1** — JSON Schema + fixtures + modelos espelhados Python/Rust + CI de sync.
 
 ## Conteúdo
 
@@ -19,7 +19,8 @@ Fonte única dos contratos FreeFlow entre os serviços edge (simulador, gateways
 
 **Eventos** (`schema_version: "1.0"`):
 
-- Envelope comum + `radar.vehicle_detected` | `lidar.vehicle_profiled` | `camera.plate_read` | `antenna.tag_read`
+- Envelope comum + `radar.vehicle_detected` | `lidar.vehicle_profiled` | `camera.plate_read` | `antenna.tag_read` | `wim.axles_counted`
+- `wim.axles_counted`: piezo/WIM para **contagem de eixos** (sem peso/massa)
 - `passage_id` pode ser `null` (gateways) ou UUID (simulador)
 - Evidência: URIs `sim://`, `s3://`, `file://`; `size_bytes` obrigatório
 
@@ -88,7 +89,7 @@ Alterar um contrato = PR neste repo → tag SemVer → bump do pin nos consumers
 
 ## Fora de escopo (ainda)
 
-Migração dos consumers (simulador, VT, gateways, uploader), WIM, UI de pórticos, codegen automático.
+Migração completa dos consumers (simulador, VT, uploader) para consumir `wim.axles_counted`, UI de pórticos, codegen automático.
 
 ## Decisões aprovadas (2026-11-25)
 

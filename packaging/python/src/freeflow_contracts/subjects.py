@@ -8,6 +8,7 @@ SENSOR_EVENT_NAMES = {
     "lidar": "vehicle_profiled",
     "camera": "plate_read",
     "antenna": "tag_read",
+    "wim": "axles_counted",
 }
 
 

@@ -1,7 +1,8 @@
 use std::{fs, path::PathBuf};
 
 use freeflow_contracts::{
-    event_subject, passage_subject, Observation, PassageFinalized, PassageStatus, VehicleEvent,
+    event_subject, passage_subject, Observation, PassageEvidencePackage, PassageFinalized,
+    PassageLostPackage, PassageStatus, VehicleEvent,
 };
 
 fn repo_root() -> PathBuf {
@@ -22,6 +23,7 @@ fn parses_all_event_fixtures() {
         "lidar.vehicle_profiled",
         "camera.plate_read",
         "antenna.tag_read",
+        "wim.axles_counted",
     ] {
         let raw = read(&format!("fixtures/v1/events/{name}.json"));
         let event = VehicleEvent::from_json(&raw).unwrap_or_else(|e| panic!("{name}: {e}"));
@@ -49,6 +51,13 @@ fn parses_passage_fixtures() {
     assert!(matches!(complete.status, PassageStatus::Complete));
     let expired = PassageFinalized::from_json(&read("fixtures/v1/passages/expired.json")).unwrap();
     assert!(matches!(expired.status, PassageStatus::Expired));
+    let package =
+        PassageEvidencePackage::from_json(&read("fixtures/v1/passages/evidence_package.json"))
+            .unwrap();
+    assert_eq!(package.gantry_id, "A1-KM10-N");
+    let lost =
+        PassageLostPackage::from_json(&read("fixtures/v1/passages/lost_package.json")).unwrap();
+    assert_eq!(lost.gantry_id, "A1-KM10-N");
 }
 
 #[test]

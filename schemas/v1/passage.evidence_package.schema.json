@@ -1,0 +1,214 @@
+{
+  "$id": "https://schemas.freeflow.local/passages/v1/passage.evidence_package.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "type": "string"
+    },
+    "package_id": {
+      "format": "uuid",
+      "type": "string"
+    },
+    "passage_id": {
+      "format": "uuid",
+      "type": "string"
+    },
+    "gantry_id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "lane": {
+      "anyOf": [
+        {
+          "minimum": 1,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "vehicle_class": {
+      "anyOf": [
+        {
+          "enum": ["light", "heavy", "motorcycle"],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "occurred_at": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "assembled_at": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "ack_state": {
+      "enum": ["pending", "acked", "lost"],
+      "type": "string"
+    },
+    "confidence": {
+      "additionalProperties": false,
+      "properties": {
+        "correlation": {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        },
+        "plate": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "overall": {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        }
+      },
+      "required": ["correlation", "overall"],
+      "type": "object"
+    },
+    "media": {
+      "additionalProperties": false,
+      "properties": {
+        "video_lateral": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/media_ref"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "video_overview": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/media_ref"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "anpr": {
+          "items": {
+            "$ref": "#/$defs/media_ref"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["anpr"],
+      "type": "object"
+    },
+    "events": {
+      "description": "Structured sensor/tracker events for twin replay (not raw video/OCR).",
+      "items": {
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "passage": {
+      "description": "Optional embedded passage.finalized snapshot.",
+      "type": "object"
+    },
+    "stubs": {
+      "additionalProperties": false,
+      "properties": {
+        "videos_pending": {
+          "type": "boolean"
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "package_id",
+    "passage_id",
+    "gantry_id",
+    "occurred_at",
+    "assembled_at",
+    "ack_state",
+    "confidence",
+    "media",
+    "events"
+  ],
+  "title": "PassageEvidencePackage",
+  "type": "object",
+  "$defs": {
+    "media_ref": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "uri": {
+          "pattern": "^(sim|s3|file)://",
+          "type": "string"
+        },
+        "media_type": {
+          "enum": ["image/jpeg", "video/mp4", "application/octet-stream"],
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "size_bytes": {
+          "exclusiveMinimum": 0,
+          "type": "integer"
+        },
+        "captured_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "role": {
+          "anyOf": [
+            {
+              "enum": [
+                "anpr_front",
+                "anpr_rear",
+                "video_lateral",
+                "video_overview",
+                "other"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": ["evidence_id", "uri", "media_type", "sha256", "size_bytes"],
+      "type": "object"
+    }
+  }
+}

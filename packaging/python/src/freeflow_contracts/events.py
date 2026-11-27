@@ -20,6 +20,7 @@ class SensorType(StrEnum):
     LIDAR = "lidar"
     CAMERA = "camera"
     ANTENNA = "antenna"
+    WIM = "wim"
 
 
 class VehicleClass(StrEnum):
@@ -107,7 +108,22 @@ class AntennaObservation(SensorObservation):
     cross_read: bool = False
 
 
-Observation = RadarObservation | LidarObservation | CameraObservation | AntennaObservation
+class WimObservation(SensorObservation):
+    """Contagem de eixos por piezo (WIM). Sem campos de peso/massa — não é pesagem."""
+
+    event_type: Literal["wim.axles_counted"] = "wim.axles_counted"
+    sensor_type: Literal[SensorType.WIM] = SensorType.WIM
+    axle_count: int = Field(ge=2, le=16)
+    sensing: Literal["piezo"] = "piezo"
+
+
+Observation = (
+    RadarObservation
+    | LidarObservation
+    | CameraObservation
+    | AntennaObservation
+    | WimObservation
+)
 
 
 class EventEnvelope(StrictModel):
